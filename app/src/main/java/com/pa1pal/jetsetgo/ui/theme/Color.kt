@@ -13,26 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge
+package com.pa1pal.jetsetgo.ui.theme
 
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import androidx.compose.ui.graphics.Color
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-@RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
-    @get:Rule
-    val composeTestRule = createAndroidComposeRule<MainActivity>()
-
-    @Test
-    fun sampleTest() {
-        // Add instrumented tests here
-    }
-}
+val purple200 = Color(0xFFBB86FC)
+val purple500 = Color(0xFF6200EE)
+val purple700 = Color(0xFF3700B3)
+val teal200 = Color(0xFF03DAC5)
+val grey = Color(0xFF555F5E)
+val darkGrey = Color(0xFF0E0F0F)
+val yellow = Color(0xFFD1A10A)
+val darkGrey200 = Color(0xFF151515)
+val green = Color(0xFF19361E)
+val neon = Color(0xFF3DAF50)
+val white = Color(0xFFFFFFFF)
