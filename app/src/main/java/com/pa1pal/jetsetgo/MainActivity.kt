@@ -33,44 +33,50 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun HomeScreen(viewModel: MainViewModel, modifier: Modifier = Modifier) {
     LazyColumn(
-            modifier = modifier
-                    .fillMaxSize()
-                    .background(darkGrey),
-            verticalArrangement = Arrangement.SpaceEvenly,
-            content = {
-                item {
-                    CountDownView(modifier = modifier
-                            .fillMaxWidth()
-                            .height(240.dp),
-                            progress = viewModel.progress, time = viewModel.minutes + ":" + viewModel.seconds)
-                }
-                item {
-                    Spacer(modifier = modifier.height(10.dp))
-                }
-                item {
-                    ButtonsUI(modifier = Modifier,
-                            onStartClick = viewModel::changeTimerState,
-                            onStopClick = viewModel::stopAndResetTimer,
-                            onAddSecondsClick = viewModel::onAddSeconds,
-                            onSubtractSecondsClick = viewModel::onSubtractSeconds,
-                            timerState = viewModel.timerState,
-                            progress = viewModel.progress)
-                }
-            })
+        modifier = modifier
+            .fillMaxSize()
+            .background(darkGrey),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        content = {
+            item {
+                CountDownView(
+                    modifier = modifier
+                        .fillMaxWidth(),
+                    progress = viewModel.progress,
+                    time = viewModel.minutes + ":" + viewModel.seconds
+                )
+            }
+            item {
+                Spacer(modifier = modifier.height(40.dp))
+            }
+            item {
+                ButtonsUI(
+                    modifier = modifier,
+                    onStartClick = viewModel::changeTimerState,
+                    onStopClick = viewModel::stopAndResetTimer,
+                    onAddSecondsClick = viewModel::onAddSeconds,
+                    onSubtractSecondsClick = viewModel::onSubtractSeconds,
+                    timerState = viewModel.timerState,
+                    progress = viewModel.progress
+                )
+            }
+        })
 }
 
 @Composable
 fun StartButton(onStartClick: () -> Unit, buttonText: String) {
-    CircularButton(onClick = onStartClick, buttonText = buttonText, backgroundColor = green,
-            textColor = neon
+    CircularButton(
+        onClick = onStartClick, buttonText = buttonText, backgroundColor = green,
+        textColor = neon
     )
 }
 
 @Composable
 fun StopButton(onStopClick: () -> Unit) {
-    CircularButton(onClick = onStopClick, buttonText = stringResource(id = R.string.stop),
-            backgroundColor = darkGrey200,
-            textColor = white
+    CircularButton(
+        onClick = onStopClick, buttonText = stringResource(id = R.string.stop),
+        backgroundColor = darkGrey200,
+        textColor = white
     )
 }
 
@@ -82,12 +88,18 @@ fun ButtonsUI(
     onAddSecondsClick: () -> Unit,
     onSubtractSecondsClick: () -> Unit,
     timerState: TimerState,
-    progress: Float) {
-    Column() {
-        Row(horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()) {
+    progress: Float
+) {
+    Column(
+        modifier = modifier
+            .padding(20.dp)
+            .fillMaxWidth()
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = modifier
+                .fillMaxWidth()
+        ) {
 
             val buttonText = if (timerState == TimerState.TIMER_RUNNING) {
                 stringResource(id = R.string.pause)
@@ -102,19 +114,21 @@ fun ButtonsUI(
             StartButton(onStartClick = onStartClick, buttonText)
         }
 
-        Row(horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = modifier
+                .padding(20.dp)
+                .fillMaxWidth()
+        ) {
 
-            TimerButtons(onClick = onSubtractSecondsClick, buttonText = stringResource(id = R.string.sub15))
-            TimerButtons(onClick = onAddSecondsClick, buttonText = stringResource(id = R.string.add15))
+            TimerButtons(
+                onClick = onSubtractSecondsClick,
+                buttonText = stringResource(id = R.string.sub15)
+            )
+            TimerButtons(
+                onClick = onAddSecondsClick,
+                buttonText = stringResource(id = R.string.add15)
+            )
         }
     }
-}
-
-@Preview("countdownview", widthDp = 360, heightDp = 640)
-@Composable
-fun CountDownViewPreview() {
-    CountDownView(modifier = Modifier, progress = 1.0f, time = "1000")
 }
