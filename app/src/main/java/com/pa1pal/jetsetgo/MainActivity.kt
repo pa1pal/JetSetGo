@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,35 +33,32 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun HomeScreen(viewModel: MainViewModel, modifier: Modifier = Modifier) {
-    LazyColumn(
+    Column(
         modifier = modifier
             .fillMaxSize()
             .background(darkGrey),
         verticalArrangement = Arrangement.SpaceEvenly,
-        content = {
-            item {
-                CountDownView(
-                    modifier = modifier
-                        .fillMaxWidth(),
-                    progress = viewModel.progress,
-                    time = viewModel.minutes + ":" + viewModel.seconds
-                )
-            }
-            item {
-                Spacer(modifier = modifier.height(40.dp))
-            }
-            item {
-                ButtonsUI(
-                    modifier = modifier,
-                    onStartClick = viewModel::changeTimerState,
-                    onStopClick = viewModel::stopAndResetTimer,
-                    onAddSecondsClick = viewModel::onAddSeconds,
-                    onSubtractSecondsClick = viewModel::onSubtractSeconds,
-                    timerState = viewModel.timerState,
-                    progress = viewModel.progress
-                )
-            }
-        })
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        CountDownView(
+            modifier = modifier.fillMaxWidth(.80f)
+                .fillMaxHeight(.50f),
+            progress = viewModel.progress,
+            time = viewModel.minutes + ":" + viewModel.seconds
+        )
+
+        ButtonsUI(
+            modifier = modifier,
+            onStartClick = viewModel::changeTimerState,
+            onStopClick = viewModel::stopAndResetTimer,
+            onAddSecondsClick = viewModel::onAddSeconds,
+            onSubtractSecondsClick = viewModel::onSubtractSeconds,
+            timerState = viewModel.timerState,
+            progress = viewModel.progress
+        )
+
+    }
 }
 
 @Composable
@@ -131,4 +129,10 @@ fun ButtonsUI(
             )
         }
     }
+}
+
+@Composable
+@Preview
+fun Preview_Home() {
+    HomeScreen(MainViewModel())
 }
