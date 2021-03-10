@@ -3,11 +3,14 @@ package com.pa1pal.jetsetgo.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -33,49 +36,41 @@ fun CountDownView(
         Font(R.font.montserrat_regular, FontWeight.Light)
     )
 
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-        ,
-        contentAlignment = Alignment.Center
-    ) {
-        JetSetGoCircleAnimation(modifier = modifier.size(140.dp), progress = 1.0f, color = grey)
-        JetSetGoCircleAnimation(modifier = modifier.size(140.dp), progress = progress, color = yellow)
+        Box(modifier = modifier.fillMaxSize(1.0f), contentAlignment = Alignment.Center) {
 
-        Text(
-            modifier = modifier
-                .wrapContentWidth()
-                .wrapContentHeight(),
-            text = time,
-            color = white,
-            fontSize = 60.sp,
-            fontFamily = font,
-            style = MaterialTheme.typography.h4
-        )
-    }
+            JetSetGoCircleAnimation(modifier = Modifier.fillMaxSize(), progress = 1.0f, color = grey)
+
+            JetSetGoCircleAnimation(modifier = Modifier.fillMaxSize(), progress = progress, color = yellow)
+
+            Text(
+                modifier = modifier
+                    .wrapContentWidth()
+                    .wrapContentHeight(),
+                text = time,
+                color = white,
+                fontSize = 60.sp,
+                fontFamily = font,
+                style = MaterialTheme.typography.h4
+            )
+        }
 }
 
 @Preview("countdownview", heightDp = 700)
 @Composable
 fun CountDownViewPreview() {
-    LazyColumn(
+    Column(
         modifier = Modifier
 
             .background(darkGrey),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        content = {
-            item {
-                CountDownView(modifier = Modifier.fillMaxWidth(), progress = 1.0f, time = "1000")
+        verticalArrangement = Arrangement.Center
+    ) {
+        CountDownView(modifier = Modifier.fillMaxSize(), progress = 1.0f, time = "1000")
+    }
 
-            }
-            item {
-                Spacer(modifier = Modifier.height(40.dp))
-            }
-        })
 }
 
 @Preview("countdownprogress", heightDp = 400)
 @Composable
 fun CountDownPreview() {
-    CountDownView(modifier = Modifier.fillMaxWidth(), progress = 1.0f, time = "1000")
+    CountDownView(modifier = Modifier.fillMaxSize(), progress = 1.0f, time = "1000")
 }
